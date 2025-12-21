@@ -1,9 +1,19 @@
-from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QPushButton, QLineEdit
+from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QPushButton, QLineEdit, QGridLayout
 import sys
 from PyQt6.QtCore import Qt
 import os
 
+"""
+def settings_grid():
+    layout = QGridLayout()
+    window = QWidget()
+    window.setLayout(layout)
 
+    search_bar = QLineEdit()
+    #URGENT: Create a pillShape
+    search_bar.setFrameShape(Qt.FrameShape.PillShape)
+
+"""
 def settings_window():
     layout = QVBoxLayout()
     window = QWidget()

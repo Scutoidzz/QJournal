@@ -35,6 +35,7 @@ def qjournal():
     button_layout = QHBoxLayout(button_widget)
     button_layout.addWidget(new_entry_button)
     horizonlayout.addWidget(button_widget)
+    
     main_window.setWindowTitle("QJournal")
     
     # Set up central widget
