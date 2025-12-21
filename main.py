@@ -6,5 +6,6 @@ import datetime
 import time
 from firsttimesetup.onepager import onepager
 
-onepager(QApplication(sys.argv))
+onepager()
+
 

@@ -1,4 +1,2 @@
-# IMPROVEMENT NEEDED: Specify version numbers for reproducible builds
-# IMPROVEMENT NEEDED: Consider adding requirements for development (pytest, black, flake8, etc.)
-# IMPROVEMENT NEEDED: Add comments explaining why each dependency is needed
-PyQt6
+sqlite3 >= 1.0.0
+PyQt6 >= 6.0.0

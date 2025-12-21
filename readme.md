@@ -1,11 +1,8 @@
 # QJournal
 ### Advanced journaling app
 
-# IMPROVEMENT NEEDED: Add comprehensive project description explaining features and purpose
-# IMPROVEMENT NEEDED: Add installation instructions with step-by-step guide
-# IMPROVEMENT NEEDED: Include usage examples and screenshots
-# IMPROVEMENT NEEDED: Add requirements and dependencies section
-# IMPROVEMENT NEEDED: Include contribution guidelines
-# IMPROVEMENT NEEDED: Add license information
-# IMPROVEMENT NEEDED: Provide contact information or issue tracker link
-# IMPROVEMENT NEEDED: Add changelog or version history
+### How to run
+1. Clone the repo
+2. install the dependencies using `pip install -r requirements.txt`
+3. Run the app with `python main.py`
+4. or run this slick one liner: `python main.py`
