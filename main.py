@@ -6,24 +6,34 @@ import time
 from mainapp.qjournal import qjournal
 from firsttimesetup.onepager import QJournalSetup
 from splash.splashscreen import splash
-try:
-    config = json.load(open("config.json", "r"))
-except FileNotFoundError:
-    with open("config.json", 'x') as f:
-        f.write("{}")
-    time.sleep(1)
-    json.load(open("config.json", "r"))
 
+def load_config():
+    try:
+        with open("config.json", "r") as f:
+            config = json.load(f)
+        print("Config loaded successfully")
+        return config
+    except FileNotFoundError:
+        print("Config file not found, creating a new one...")
+        with open("config.json", 'w') as f:
+            json.dump({}, f)
+        return {}
 
-if config == "" or config == "{}":
-    firsttimeuse = 1
-else:
-    firsttimeuse = 0
+def main():
+    print("Starting QJournal...")
+    config = load_config()
+    
+    if not config:
+        print("First time use detected")
+        app = splash()
+        setup = QJournalSetup()
+        setup.onepager()
+        app.exec()
+    else:
+        print("Not first time use.")
+        qjournal()
 
-if firsttimeuse == 1:
-    splash()
-    QJournalSetup() 
-else: 
-    qjournal()
+if __name__ == "__main__":
+    main()
 
 

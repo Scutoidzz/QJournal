@@ -5,7 +5,7 @@ import json
 
 def create_database():
     try:
-        # Create a database connection
+        #  Create a database connection
         conn = sqlite3.connect("qJournal.db")
         cursor = conn.cursor()
         
@@ -17,7 +17,7 @@ def create_database():
                 content TEXT, 
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
-        """)
+        """) 
         
         # Commit the changes and close the connection
         conn.commit()

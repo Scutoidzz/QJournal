@@ -1,25 +1,53 @@
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel
-from PyQt6.QtGui import QImage, QIcon, QPixmap
-import os
+from PyQt6.QtWidgets import QApplication, QSplashScreen
+from PyQt6.QtGui import QPixmap
+from PyQt6.QtCore import Qt, QTimer
 import sys
-import time 
+import os
 
-#ToDO: create a first time splash screen
 def splash():
-    window = QWidget()
-    window.setWindowTitle("QJournal")
-    window.setWindowIcon(QIcon("assets/qlogo.png"))
-    window.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint)
-    layout = QHBoxLayout()
-    window.setLayout(layout)
-    window.setFixedSize(682, 384)
-    print("Starting")
-    screen_image = QPixmap("assets/journalsplash.png")
-    layout.addWidget(QLabel(screen_image))
-    time.sleep(5)
+    # Check if QApplication already exists
+    app = QApplication.instance()
+    if app is None:
+        app = QApplication(sys.argv)
     
-
-
-    #TODO: Create an image for the splash screen
-    #TODO: Close after 5 seconds with time.sleep(5)
+    # Use absolute path to the image
+    image_path = "/home/scutoid/Documents/QJournal/assets/journalsplash.png"
+    print(f"Attempting to load splash image from: {image_path}")
     
+    if not os.path.exists(image_path):
+        print(f"ERROR: Image file not found at {image_path}")
+        return app
+        
+    pixmap = QPixmap(image_path)
+    if pixmap.isNull():
+        print("ERROR: Failed to load image (invalid or corrupted)")
+        return app
+        
+    print(f"Image loaded successfully: {pixmap.width()}x{pixmap.height()}")
+    
+    # Create splash screen
+    splash_screen = QSplashScreen(pixmap, Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
+    splash_screen.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
+    
+    # Show the splash screen
+    splash_screen.show()
+    print("Splash screen shown")
+    
+    # Process events to make sure the window is shown
+    app.processEvents()
+    
+    # Simple wait using a loop with processEvents
+    import time
+    start_time = time.time()
+    while time.time() - start_time < 5.0:  # 5 seconds
+        app.processEvents()
+        time.sleep(0.01)  # Small sleep to prevent 100% CPU usage
+    
+    splash_screen.close()
+    print("Splash screen closed")
+    
+    # Return the app instance for further use
+    return app
+
+if __name__ == "__main__":
+    splash()
