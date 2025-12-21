@@ -1,12 +1,16 @@
 import sys
 import os
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QPushButton, QFileDialog
-import sqlite3
-import datetime
+import json
 import time
 from firsttimesetup.onepager import onepager
-#TODO: Actually implement the functions. this is a placeholder:
-firsttimeuse = True
+
+configuration = config.json
+
+if config.json == "" or config.json == None or config.json == "{}":
+    firsttimeuse = True
+else:
+    firsttimeuse = False
 
 if firsttimeuse:
     onepager()

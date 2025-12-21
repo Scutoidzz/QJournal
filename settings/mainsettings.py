@@ -3,6 +3,7 @@ import sys
 from PyQt6.QtCore import Qt
 import os
 
+
 def settings_window():
     layout = QVBoxLayout()
     window = QWidget()

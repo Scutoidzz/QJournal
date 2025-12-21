@@ -4,7 +4,7 @@ Search functionality for QJournal application.
 TODO:
 - Implement search window UI with filters and search results display
 - Add support for searching within entry titles and content
-- Implement case-insensitive search
+- Implement case-insensitive search -- or just save each entry with multiple entries
 - Add support for regular expressions in search
 - Add search history functionality
 - Implement search result highlighting
@@ -18,6 +18,7 @@ from PyQt6.QtWidgets import QLineEdit, QPushButton
 import sys
 import os
 import regex
+
 
 # TODO: Consider moving this to a configuration file
 osname = os.name
