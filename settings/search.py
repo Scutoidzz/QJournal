@@ -20,7 +20,7 @@ import os
 import regex
 
 # TODO: Consider moving this to a configuration file
-osname = os.name()
+osname = os.name
 
 def search_window(search_text):
     """Open the search window.

@@ -8,6 +8,6 @@ def encryption_settings():
     encryption_none = QRadioButton("Plain Encryption")
     encryption_base = QRadioButton("Base64 Encryption")
     encryption_hashlib = QRadioButton("Hashlib Encryption")
-    encryption_hashlib.setToolTip("Note that this package has to be installed on your computer with pip to be usable")
+    encryption_hashlib.setToolTip("Requires a password to use")
     encryption_none.setToolTip("No encryption")
     encryption_base.setToolTip("Best for most users")

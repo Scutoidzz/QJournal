@@ -1,5 +1,11 @@
 #/bin/bash
-git clone https://github.com/scutoid/QJournal.git
+echo "Cloning QJournal from GitHub..." 
+git clone https://github.com/scutoidzz/QJournal.git &> /dev/null
+echo "Sucessfully Downloaded"
 cd QJournal
-pip3 install -r requirements.txt --break-system-packages
-python3 main.py
+echo "Installing pip requirements..."
+pip3 install -r requirements.txt --break-system-packages &> /dev/null
+echo "Sucessfully Installed pip requirements"
+echo "Running QJournal..."
+python3 main.py &> /dev/null
+
