@@ -5,7 +5,10 @@ import sqlite3
 import datetime
 import time
 from firsttimesetup.onepager import onepager
+#TODO: Actually implement the functions. this is a placeholder:
+firsttimeuse = True
 
-onepager()
+if firsttimeuse:
+    onepager()
 
 

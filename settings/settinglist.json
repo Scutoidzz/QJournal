@@ -1,0 +1,246 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QJournal Settings",
+  "description": "Configuration settings for QJournal application",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Configuration version",
+      "default": "1.0.0"
+    },
+    "appearance": {
+      "type": "object",
+      "description": "UI appearance settings",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark", "system"],
+          "default": "system",
+          "description": "UI color theme"
+        },
+        "font_family": {
+          "type": "string",
+          "default": "Arial, sans-serif",
+          "description": "Default font family"
+        },
+        "font_size": {
+          "type": "integer",
+          "minimum": 8,
+          "maximum": 24,
+          "default": 12,
+          "description": "Base font size in points"
+        }
+      },
+      "required": ["theme", "font_family", "font_size"]
+    },
+    "editor": {
+      "type": "object",
+      "description": "Text editor settings",
+      "properties": {
+        "auto_save": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable auto-save functionality"
+        },
+        "auto_save_interval": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60,
+          "default": 5,
+          "description": "Auto-save interval in minutes"
+        },
+        "line_numbers": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show line numbers"
+        },
+        "word_wrap": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable word wrap"
+        },
+        "tab_size": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 8,
+          "default": 4,
+          "description": "Number of spaces for tab character"
+        },
+        "insert_spaces": {
+          "type": "boolean",
+          "default": true,
+          "description": "Insert spaces instead of tabs"
+        },
+        "auto_indent": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable auto-indentation"
+        }
+      },
+      "required": ["auto_save", "auto_save_interval", "line_numbers", "word_wrap", "tab_size", "insert_spaces", "auto_indent"]
+    },
+    "privacy": {
+      "type": "object",
+      "description": "Privacy and security settings",
+      "properties": {
+        "encrypt_local_data": {
+          "type": "boolean",
+          "default": false,
+          "description": "Encrypt local journal entries"
+        },
+        "clear_clipboard_after": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300,
+          "default": 30,
+          "description": "Clear clipboard after X seconds (0 to disable)"
+        },
+        "auto_lock_timeout": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440,
+          "default": 30,
+          "description": "Auto-lock application after X minutes of inactivity"
+        },
+        "telemetry": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable anonymous usage statistics"
+        }
+      },
+      "required": ["encrypt_local_data", "clear_clipboard_after", "auto_lock_timeout", "telemetry"]
+    },
+    "backup": {
+      "type": "object",
+      "description": "Backup and sync settings",
+      "properties": {
+        "auto_backup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic backups"
+        },
+        "backup_location": {
+          "type": "string",
+          "default": "",
+          "description": "Custom backup location (leave empty for default)"
+        },
+        "backup_interval": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly"],
+          "default": "weekly",
+          "description": "Backup frequency"
+        },
+        "keep_backups": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 10,
+          "description": "Number of backups to keep"
+        },
+        "cloud_sync": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable cloud synchronization"
+            },
+            "provider": {
+              "type": "string",
+              "enum": ["dropbox", "google_drive", "onedrive", "custom"],
+              "default": "dropbox"
+            },
+            "sync_interval": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1440,
+              "default": 15,
+              "description": "Sync interval in minutes"
+            }
+          },
+          "required": ["enabled", "provider", "sync_interval"]
+        }
+      },
+      "required": ["auto_backup", "backup_location", "backup_interval", "keep_backups", "cloud_sync"]
+    },
+    "notifications": {
+      "type": "object",
+      "description": "Notification settings",
+      "properties": {
+        "enable_notifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable desktop notifications"
+        },
+        "reminder_enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable journaling reminders"
+        },
+        "reminder_time": {
+          "type": "string",
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$",
+          "default": "20:00",
+          "description": "Daily reminder time (HH:MM, 24-hour format)"
+        },
+        "reminder_days": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 6
+          },
+          "minItems": 1,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "default": [0, 1, 2, 3, 4, 5, 6],
+          "description": "Days to show reminders (0=Sunday, 6=Saturday)"
+        }
+      },
+      "required": ["enable_notifications", "reminder_enabled", "reminder_time", "reminder_days"]
+    },
+    "keyboard_shortcuts": {
+      "type": "object",
+      "description": "Custom keyboard shortcuts for various actions",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {
+        "new_entry": "Ctrl+N",
+        "save_entry": "Ctrl+S",
+        "search": "Ctrl+F",
+        "bold": "Ctrl+B",
+        "italic": "Ctrl+I",
+        "underline": "Ctrl+U",
+        "strikethrough": "Ctrl+Shift+S",
+        "insert_link": "Ctrl+K",
+        "insert_image": "Ctrl+Shift+I",
+        "toggle_sidebar": "Ctrl+\\"
+      }
+    },
+    "experimental": {
+      "type": "object",
+      "description": "Experimental features",
+      "properties": {
+        "enable_markdown_preview": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable Markdown preview panel"
+        },
+        "ai_suggestions": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable AI-powered writing suggestions"
+        },
+        "dark_mode_v2": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable new dark mode theme (experimental)"
+        }
+      },
+      "required": ["enable_markdown_preview", "ai_suggestions", "dark_mode_v2"]
+    }
+  },
+  "required": ["version", "appearance", "editor", "privacy", "backup", "notifications", "keyboard_shortcuts", "experimental"]
+}
