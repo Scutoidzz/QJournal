@@ -1,6 +1,6 @@
 #/bin/bash
 echo "Cloning QJournal from GitHub..." 
-git clone https://github.com/scutoidzz/QJournal.git &> /dev/null
+git clone https://github.com/scutoidzz/QJournal &> /dev/null
 echo "Sucessfully Downloaded"
 cd QJournal
 echo "Installing pip requirements..."
