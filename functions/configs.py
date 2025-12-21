@@ -4,9 +4,13 @@ import sys
 # a file with system variables.
 
 def os_name():
-    osname = os.name()
+    osname = os.name
     return osname
 
 def os_version():
-    osversion = os.uname().version
+    osversion = os.uname()
     return osversion
+
+def username():
+    username = os.getlogin()
+    return username

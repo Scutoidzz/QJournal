@@ -1,11 +1,13 @@
 from PyQt6.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QPushButton, QVBoxLayout, QWidget
 import os
 from PyQt6.QtGui import QFont, QIcon, QImage
-
 import sys
 from .functions.createdb import create_database
+import sqlite3
 
-# Global variable to keep window reference
+#TODO: Implement the rotating calendar widget
+
+#To prevent garbage collection of the window
 main_window = None
 
 def qjournal():
@@ -13,6 +15,7 @@ def qjournal():
     create_database()
 
     global main_window
+    
     
     app = QApplication.instance()
     if app is None:
