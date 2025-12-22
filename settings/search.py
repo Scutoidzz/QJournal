@@ -1,5 +1,7 @@
 """
 Search functionality for QJournal application.
+TODO: Link the button to the search window.
+
 
 TODO:
 - Implement search window UI with filters and search results display
@@ -7,7 +9,6 @@ TODO:
 - Implement case-insensitive search -- or just save each entry with multiple entries
 - Add support for regular expressions in search
 - Add search history functionality
-- Implement search result highlighting
 - Add keyboard shortcuts for common search operations
 - Add support for searching within specific date ranges
 - Implement search result navigation
@@ -24,11 +25,10 @@ import regex
 osname = os.name
 
 def search_window(search_text):
+
+    
     """Open the search window.
     
-    Args:
-        search_text: Optional initial search text to pre-populate the search field
-        
     TODO:
     - Create a proper search window UI
     - Add search filters (date range, tags, etc.)

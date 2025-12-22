@@ -7,7 +7,20 @@ from mainapp.qjournal import qjournal
 from firsttimesetup.onepager import QJournalSetup
 from splash.splashscreen import splash
 
+# TODO: Add logging configuration for better debugging
+# TODO: Implement proper error handling throughout the application
+# TODO: Add support for command-line arguments
+# TODO: Consider using a proper application framework structure
+
 def load_config():
+    """Load application configuration from config.json.
+    
+    TODO:
+    - Add validation for config structure
+    - Implement default configuration values
+    - Add support for environment-specific configs
+    - Use proper configuration management library
+    """
     try:
         with open("config.json", "r") as f:
             config = json.load(f)
@@ -20,17 +33,28 @@ def load_config():
         return {}
 
 def main():
+    """Main application entry point.
+    
+    TODO:
+    - Add proper exception handling for startup errors
+    - Implement graceful shutdown procedures
+    - Add support for multiple instances/single instance mode
+    - Consider using argparse for command-line options
+    """
     print("Starting QJournal...")
     config = load_config()
     
     if not config:
         print("First time use detected")
+        # TODO: Ensure proper cleanup of QApplication instances
         app = splash()
         setup = QJournalSetup()
         setup.onepager()
+        # TODO: Handle application exit properly
         app.exec()
     else:
         print("Not first time use.")
+        # TODO: Handle potential errors in qjournal startup
         qjournal()
 
 if __name__ == "__main__":

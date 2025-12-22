@@ -6,12 +6,23 @@ import os
 settings_window_instance = None
 
 def settings_window():
+    """Open the settings window.
+    
+    TODO:
+    - Implement proper window management and cleanup
+    - Add settings persistence and validation
+    - Implement actual functionality for all settings
+    - Add proper layout management
+    - Consider using a QDialog instead of QWidget
+    """
     global settings_window_instance
     #TODO: Add the rest of the settings buttons
     layout = QVBoxLayout()
     window = QWidget()
     window.setLayout(layout)
     
+    # TODO: Implement actual functionality for search bar
+    # TODO: Add search functionality and connect to search module
     search_bar = QLineEdit()
     search_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
     search_bar.setPlaceholderText("Search")
@@ -21,10 +32,12 @@ def settings_window():
     settings_label = QLabel("Settings")
     layout.addWidget(settings_label)
 
+    # TODO: Add actual functionality for cloud button
+    # TODO: Implement cloud settings integration
     cloud_button = QPushButton("Cloud")
     cloud_button.setFixedSize(100, 50)
-    #TODO: Improve button locations 
-
+    # TODO: Fix button positioning - use proper layout instead of move()
+    # TODO: Add proper spacing and alignment
     cloud_button.move(200, 20)
 
 

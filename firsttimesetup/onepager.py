@@ -54,7 +54,6 @@ class QJournalSetup():
 
 
 
-        # TODO: Add tooltips and accessibility features for better UX
         start_button = QPushButton("Start")
         start_button.move(291, 172)
         start_button.setFixedSize(100, 50)
@@ -72,6 +71,7 @@ class QJournalSetup():
         seperator_line = QFrame()
         seperator_line.setFrameShape(QFrame.Shape.VLine)
         seperator_line.setLineWidth(2)
+        #TODO: Move this to the file
         seperator_line.setStyleSheet("""
             QFrame {
                 background-color: #666;

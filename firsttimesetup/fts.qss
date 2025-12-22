@@ -1,5 +1,5 @@
 QPushButton{
-    border-radius: 35px;
+    border-radius: 10px;
     border: 2px solid #000;
     background-color: #5252afff;
     text-align: center;

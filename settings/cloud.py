@@ -4,6 +4,7 @@ from PyQt6.QtGui import QIcon, QPixmap
 import requests
 
 def cloud_settings():
+    #TODO: Use each service's API to add sync - maybe AI? nah, I wouldn't want AI to read my personal stuff frfr
     print("Loading cloud settings")
     window = QWidget()
     window.setWindowTitle("Cloud Settings")
