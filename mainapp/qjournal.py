@@ -3,15 +3,17 @@ import os
 from PyQt6.QtGui import QFont, QIcon, QImage
 import sys
 import json
+from settings.mainsettings import settings_window
 from .functions.createdb import create_database
 import sqlite3
 #TODO: Create app ready icon
-#TODO: Implement the rotating calendar widget
+#TODO: Create the rotating calendar widget
 
 #To prevent garbage collection of the window
 main_window = None
 
-def qjournal():    
+def qjournal():
+    
     # either create or init
     create_database()
 
@@ -26,7 +28,8 @@ def qjournal():
     if main_window is not None:
         main_window.close()
     
-    main_window = QMainWindow()   
+    main_window = QMainWindow()
+    main_window.setWindowIcon(QIcon("assets/qappicon.png"))
     button_widget = QWidget()
     button_layout = QHBoxLayout(button_widget)
     with open("mainapp/maintheming.qss", "r") as f:
@@ -41,6 +44,8 @@ def qjournal():
     settings_button = QPushButton("Settings")
     new_entry_button.setFixedSize(321, 100)
     settings_button.setFixedSize(321, 100)
+
+    settings_button.clicked.connect(settings_window)
     button_widget = QWidget()
     button_layout = QHBoxLayout(button_widget)
     button_layout.addWidget(new_entry_button)
@@ -53,7 +58,6 @@ def qjournal():
     central_widget = QWidget()
     central_widget.setLayout(vertlayout)
     main_window.setCentralWidget(central_widget)
-    
     main_window.show()
     
     # Don't call exec() here since the event loop is already running

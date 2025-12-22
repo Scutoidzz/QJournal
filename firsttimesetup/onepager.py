@@ -32,7 +32,8 @@ class QJournalSetup():
         self.window.setWindowTitle("QJournal")
         
         try:
-            self.window.setWindowIcon(QIcon("assets/qlogo.png"))
+            self.window.setWindowIcon(QIcon("assets/qappicon.png"))
+            
         except Exception as error:
             print(f"Error with window icon: {error}")
         
@@ -90,7 +91,6 @@ class QJournalSetup():
         introprinter.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         
         content_layout.addStretch()  # Left spacer to center separator
-        content_layout.addWidget(seperator_line)
         content_layout.addWidget(introprinter, 1)  # Stretch to fill remaining space 
         
         layouth.addWidget(content_container)

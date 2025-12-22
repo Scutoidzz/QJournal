@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QApplication, QSplashScreen
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt, QTimer
 import sys
 import os
@@ -28,7 +28,8 @@ def splash():
     # Create splash screen
     splash_screen = QSplashScreen(pixmap, Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
     splash_screen.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
-    
+    splash_screen.setWindowIcon(QIcon("assets/qappicon.png"))
+
     # Show the splash screen
     splash_screen.show()
     print("Splash screen shown")
