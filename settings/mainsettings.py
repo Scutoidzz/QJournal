@@ -3,17 +3,6 @@ import sys
 from PyQt6.QtCore import Qt
 import os
 
-"""
-def settings_grid():
-    layout = QGridLayout()
-    window = QWidget()
-    window.setLayout(layout)
-
-    search_bar = QLineEdit()
-    #URGENT: Create a pillShape
-    search_bar.setFrameShape(Qt.FrameShape.PillShape)
-
-"""
 def settings_window():
     layout = QVBoxLayout()
     window = QWidget()
@@ -22,6 +11,7 @@ def settings_window():
     search_bar = QLineEdit()
     search_bar.setFrameShape(Qt.FrameShape.BoxShape)
     search_bar.setFlags(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop)
+    
     layout.addWidget(search_bar)
 
     settings_label = QLabel("Settings")

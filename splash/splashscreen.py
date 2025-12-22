@@ -11,7 +11,7 @@ def splash():
         app = QApplication(sys.argv)
     
     # Use absolute path to the image
-    image_path = "/home/scutoid/Documents/QJournal/assets/journalsplash.png"
+    image_path = "assets/journalsplash.png"
     print(f"Attempting to load splash image from: {image_path}")
     
     if not os.path.exists(image_path):
