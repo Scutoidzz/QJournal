@@ -24,7 +24,6 @@ class QSwitch(QtWidgets.QSlider):
         TODO:
         - Add proper initialization with parent widget
         - Add configuration options (size, colors, etc.)
-        - Fix the unused 'unedited' variable
         - Actually return or use the configured slider
         - Add proper parameter validation
         """
@@ -32,7 +31,6 @@ class QSwitch(QtWidgets.QSlider):
         # TODO: Fix this implementation - currently creates but doesn't use the slider
         # TODO: Add proper styling with CSS or QSS
         # TODO: Add hover and active states
-        # TODO: Fix the CSS syntax error ('horizonal' should be 'horizontal')
         # TODO: Add actual toggle functionality
         # TODO: Add signals for state changes
         unedited = QSlider()

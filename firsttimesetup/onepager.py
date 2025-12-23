@@ -46,14 +46,13 @@ class QJournalSetup():
 
 
         
-        # TODO: Add proper layout management instead of manual positioning
         # TODO: Implement responsive design for different screen sizes
         # TODO: Add proper widget alignment and spacing
         QJournal = QLabel("QJournal")
         QJournal.move(291, 50)
         QJournal.setFont(font)
 
-        # TODO: Add button styling consistency with main app
+        # TODO: Create a QSS and link it to the file
         # TODO: Add keyboard shortcuts and accessibility
         # TODO: Add hover effects and visual feedback
         start_button = QPushButton("Start")

@@ -8,7 +8,10 @@ import json
 import atexit
 
 def for_atexit():
-    print("Bye bro...")
+    print("""Bye bro...""")
+
+def save_entry():
+    sqlite3.connect("QJournal.db")
 
 def new_entry():
 
@@ -59,7 +62,7 @@ def new_entry():
     cancel_button = QPushButton("Cancel")
     cancel_button.setFixedSize(321, 100)
 
-
+    #TODO: Add Icon
 
     mood_button = QPushButton("Mood")
     mood_button.setFixedSize(682, 50)

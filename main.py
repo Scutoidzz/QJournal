@@ -9,7 +9,6 @@ from splash.splashscreen import splash
 
 # TODO: Add logging configuration for better debugging
 # TODO: Implement proper error handling throughout the application
-# TODO: Add support for command-line arguments
 # TODO: Consider using a proper application framework structure
 
 def load_config():
@@ -32,25 +31,19 @@ def load_config():
             json.dump({}, f)
         return {}
 
-def main():
-    """Main application entry point.
-    
-    TODO:
-    - Add proper exception handling for startup errors
-    - Implement graceful shutdown procedures
-    - Add support for multiple instances/single instance mode
-    - Consider using argparse for command-line options
-    """
+def main():    
+    #TODO:
+    #- Add proper exception handling for startup errors
+    #- Add support for multiple instances/single instance mode
+    #- Consider using argparse for command-line options
     print("Starting QJournal...")
     config = load_config()
     
     if not config:
         print("First time use detected")
-        # TODO: Ensure proper cleanup of QApplication instances
         app = splash()
         setup = QJournalSetup()
         setup.onepager()
-        # TODO: Handle application exit properly
         app.exec()
     else:
         print("Not first time use.")

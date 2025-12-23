@@ -69,7 +69,7 @@ def qjournal():
     # TODO: Add keyboard shortcuts (Ctrl+N for new entry, Ctrl+/ for Command Prompt)
     # TODO: Add tooltips and accessibility features
     # TODO: Implement proper button styling consistency
-    # TODO: Add button icons for better UX
+    # TODO: Add button icons 
     new_entry_button = QPushButton("New Entry")
     # TODO: Add tooltips and accessibility features
     # TODO: Implement proper button styling consistency

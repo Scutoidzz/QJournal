@@ -11,7 +11,6 @@ def cloud_settings():
     TODO:
     - Implement actual cloud functionality and API integration
     - Add authentication system for cloud services
-    - Add sync status indicators
     - Add cloud provider selection (Google Drive, Dropbox, etc.)
     - Add conflict resolution for sync issues
     - Add offline mode support
@@ -31,6 +30,7 @@ def cloud_settings():
     # TODO: Add actual cloud settings UI components
     # TODO: Add authentication widgets
     # TODO: Add sync status display
+    # TODO: Add constant syncing
     # TODO: Add provider selection
     # TODO: Add settings for sync frequency
     # TODO: Add connection test functionality

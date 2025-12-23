@@ -2,7 +2,12 @@ import sqlite3
 import os
 import sys
 import json
+import logging as log
 import regex
+
+def log_errors():
+    log.basicConfig(level=log.ERROR)
+    
 
 def create_database():
     """
@@ -19,8 +24,6 @@ def create_database():
     try:
         cursor = conn.cursor()
         
-        # Create table if it doesn't exist
-        # TODO: Add more comprehensive table schema
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS entries (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -38,7 +41,6 @@ def create_database():
         return True
         
     except sqlite3.Error as e:
-        # TODO: Implement proper logging instead of print statements
         print(f"Database error: {e}")
         print("Create an issue on GitHub at scutoidzz/QJournal")
         

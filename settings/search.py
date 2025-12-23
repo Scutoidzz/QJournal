@@ -8,7 +8,6 @@ TODO:
 - Add support for searching within entry titles and content
 - Implement case-insensitive search -- or just save each entry with multiple entries
 - Add support for regular expressions in search
-- Add search history functionality
 - Add keyboard shortcuts for common search operations
 - Add support for searching within specific date ranges
 - Implement search result navigation
@@ -41,14 +40,7 @@ def search_window(search_text):
 
 
 def search_function(search_text):
-    """Core search functionality.
-    
-    Args:
-        search_text: The text to search for
-        
-    Returns:
-        List of matching entries with metadata
-        
+    """
     TODO:
     - Implement actual search logic
     - Add support for fuzzy matching
