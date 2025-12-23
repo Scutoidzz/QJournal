@@ -19,3 +19,5 @@ def cloud_settings():
     providerlabel = QLabel("Provider")
     layout.addWidget(providerlabel)
     providerlabel.move(10, 10)
+
+    

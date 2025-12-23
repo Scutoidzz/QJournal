@@ -15,7 +15,6 @@ class QSwitch(QtWidgets.QSlider):
     - Add proper toggle functionality
     - Add custom styling for switch appearance
     - Add signals for state changes
-    - Add keyboard accessibility
     - Add proper initialization parameters
     """
     def __init__(self, parent=None):
@@ -40,6 +39,7 @@ class QSwitch(QtWidgets.QSlider):
         unedited.setValue(0)
         unedited.setStyleSheet("QSlider::groove:horizontal { height: 10px; background: #ccc; border-radius: 5px;}  QSlider::groove:horizontal:hover {height: 10px; background: #fff; border-radius: 0px;}")
         
-        # TODO: Actually use the slider or return it
+        # See if this is callable
+        return unedited.value()
         # TODO: Add click handler for toggle functionality
         # TODO: Add visual feedback for state changes

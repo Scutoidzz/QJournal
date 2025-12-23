@@ -62,7 +62,7 @@ def new_entry():
     cancel_button = QPushButton("Cancel")
     cancel_button.setFixedSize(321, 100)
 
-    #TODO: Add Icon
+    #TODO: Add Icons to buttons
 
     mood_button = QPushButton("Mood")
     mood_button.setFixedSize(682, 50)

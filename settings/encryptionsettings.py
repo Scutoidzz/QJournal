@@ -13,5 +13,4 @@ def encryption_settings():
     encryption_none.setToolTip("No encryption")
     encryption_base.setToolTip("Best for most users")
 
-    # See if this fixes the garbage collection issues
     return encryption_none, encryption_base, encryption_hashlib
