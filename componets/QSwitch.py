@@ -2,36 +2,10 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QSlider, QCheckBox, QRadioButton, QPushButton
 from PyQt6.QtCore import Qt
 
-# TODO: Implement custom styling system
-# TODO: Add accessibility features
-# TODO: Consider using existing toggle switch libraries
-
 
 class QSwitch(QtWidgets.QSlider):
-    """A custom toggle switch widget based on QSlider.
-    
-    TODO:
-    - Complete the implementation - currently only creates an unused slider
-    - Add proper toggle functionality
-    - Add custom styling for switch appearance
-    - Add signals for state changes
-    - Add proper initialization parameters
-    """
     def __init__(self, parent=None):
-        """Initialize the QSwitch.
-        
-        TODO:
-        - Add proper initialization with parent widget
-        - Add configuration options (size, colors, etc.)
-        - Actually return or use the configured slider
-        - Add proper parameter validation
-        """
         super().__init__(parent)
-        # TODO: Fix this implementation - currently creates but doesn't use the slider
-        # TODO: Add proper styling with CSS or QSS
-        # TODO: Add hover and active states
-        # TODO: Add actual toggle functionality
-        # TODO: Add signals for state changes
         unedited = QSlider()
         unedited.setOrientation(Qt.Orientation.Horizontal)
         unedited.setMinimum(0)
@@ -41,5 +15,3 @@ class QSwitch(QtWidgets.QSlider):
         
         # See if this is callable
         return unedited.value()
-        # TODO: Add click handler for toggle functionality
-        # TODO: Add visual feedback for state changes

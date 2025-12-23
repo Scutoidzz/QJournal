@@ -9,28 +9,11 @@ from newentry.newentry import new_entry
 from .functions.createdb import create_database
 import sqlite3
 
-# TODO: Implement proper window state management
-
-#To prevent garbage collection of the window
 main_window = None
 
 def qjournal():
-    """Main application entry point for QJournal.
     
-    TODO:
-    - Add proper error handling for database creation
-    - Implement proper window state management
-    - Add application lifecycle management
-    - Add proper cleanup on exit
-    - Implement rotating calendar widget
-    - Add keyboard shortcuts system
-    - Add proper configuration loading
-    - Add window positioning and size persistence
-    """
-    
-    # TODO: Add proper error handling for database creation
     create_database()
-# TODO: Create the rotating calendar widget
 
     global main_window
     
@@ -65,18 +48,8 @@ def qjournal():
     button_widget = QWidget()
     button_layout = QHBoxLayout(button_widget)
     
-    # TODO: Implement actual functionality for new entry button
-    # TODO: Add keyboard shortcuts (Ctrl+N for new entry, Ctrl+/ for Command Prompt)
-    # TODO: Add tooltips and accessibility features
-    # TODO: Implement proper button styling consistency
-    # TODO: Add button icons 
     new_entry_button = QPushButton("New Entry")
-    # TODO: Add tooltips and accessibility features
-    # TODO: Implement proper button styling consistency
     settings_button = QPushButton("Settings")
-    # TODO: Add consistent styling for all buttons
-    # TODO: Add button icons for better visual hierarchy
-    # TODO: Add keyboard shortcuts (Ctrl+, for settings)
     settings_button.setToolTip("Open Settings")
     new_entry_button.setFixedSize(321, 100)
     new_entry_button.setToolTip("Create a new entry")
@@ -99,21 +72,7 @@ def qjournal():
     new_entry_button.clicked.connect(new_entry)
     
     main_window.show()
-    
-    # TODO: Add proper window state management
-    # TODO: Add window position and size persistence
-    # TODO: Add proper cleanup on application exit
-    # TODO: Add system tray integration
-    # Don't call exec() here since the event loop is already running
 def save_config():
-        
-    """
-    TODO:
-    - Add input validation for config data
-    - Implement proper error handling
-    - Use more descriptive configuration keys
-    - Consider using a configuration class
-    """
     print("saving to config")
     to_be_converted = {
         "setup_completed":"True",

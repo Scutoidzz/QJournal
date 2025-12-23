@@ -1,7 +1,7 @@
 import hashlib
 
 def encrypt_hashlib(password, text):
-    #TODO: Add password encryption
     print("Encrypting")
     hashed = hashlib.sha256(text.encode()).hexdigest()
+    password = hashlib.sha256(password.encode()).hexdigest()
     return hashed

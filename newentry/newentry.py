@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QLabel
+from PyQt6.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QLabel, QHBoxLayout
 from PyQt6.QtGui import QIcon, QFont, QPixmap
 from PyQt6.QtCore import Qt
 import sys
@@ -13,26 +13,11 @@ def for_atexit():
 def save_entry():
     sqlite3.connect("QJournal.db")
 
+def go_back():
+    new_entry_window.close()
+
 def new_entry():
-
     global new_entry_window
-    
-
-    # URGENT:  Create a cloud activity indicator
-    """
-    TODO:
-    - Implement actual save functionality for entries
-    - Add database integration for storing entries
-    - Add title field for entries
-    - Add mood/tag selection
-    - Implement proper window management and cleanup
-    - Add keyboard shortcuts (Ctrl+S to save, Ctrl+Q to quit)
-    - Add auto-save functionality
-    - Add character counter and word count
-    - Add proper error handling for database operations
-    - Add entry validation (empty content check)
-    - Add timestamp display
-    """
     print("New entry")
     new_entry_window  = QWidget()
     try:
@@ -50,38 +35,34 @@ def new_entry():
     font = QFont("Arial", 34)
     new_entry_label.setFont(font)
 
+
+
     entry_input = QTextEdit()
     entry_input.setPlaceholderText("Create a journal entry")
-    entry_input.setFixedSize(682, 200)
+    entry_input.setFixedSize(642, 200)
     layout.addWidget(entry_input)
 
     submit_button = QPushButton("Submit")
+
     submit_button.setFixedSize(321, 100)
+    #TODO: Create a mockup to find the move
     submit_button.move(20, 20)
 
     cancel_button = QPushButton("Cancel")
     cancel_button.setFixedSize(321, 100)
+    cancel_button.clicked.connect(go_back())
+    
 
-    #TODO: Add Icons to buttons
+    # LOWPRIORITY: Add icons to buttons
 
     mood_button = QPushButton("Mood")
-    mood_button.setFixedSize(682, 50)
+    mood_button.setFixedSize(642, 50)
 
     buttonbarlayout = QHBoxLayout()
     layout.addWidget(mood_button)
+
     buttonbarlayout.addWidget(submit_button)
     buttonbarlayout.addWidget(cancel_button)
     layout.addLayout(buttonbarlayout)
 
-
-
-    # TODO: Add save button with proper functionality
-    # TODO: Add cancel button
-    # TODO: Add mood selection widget
-    # TODO: Add tag input system
-    # TODO: Add window state management
-    
     new_entry_window.show()
-    
-    # TODO: Prevent window garbage collection
-    # TODO: Add proper cleanup on window close
