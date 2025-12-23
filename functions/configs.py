@@ -1,11 +1,7 @@
+
 import os
 import sys
 import platform
-
-# TODO: Consider using a proper system information library
-# TODO: Add error handling for system calls
-# TODO: Add caching for system information
-# TODO: Add cross-platform compatibility checks
 
 # a file with system variables.
 

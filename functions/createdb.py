@@ -12,19 +12,24 @@ def create_database():
     - Add database backup and recovery mechanisms
     - Add database indexing for better performance
     """
+    # TODO: Make database path configurable
+    # TODO: Add proper error handling for database file permissions
+    conn = sqlite3.connect("qJournal.db")
+    
     try:
         cursor = conn.cursor()
         
         # Create table if it doesn't exist
         # TODO: Add more comprehensive table schema
-        # TODO: Add proper foreign key constraints
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS entries (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 title TEXT, 
-                content TEXT, 
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                mood INTEGER
+                content TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                mood INTEGER,
+                tags TEXT,
+                regex_detected TEXT
             )
         """) 
         

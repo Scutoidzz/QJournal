@@ -1,6 +1,9 @@
 from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QPushButton, QLineEdit, QGridLayout
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon, QPixmap
 import os
+import sys
+
 
 # Global reference to prevent garbage collection
 settings_window_instance = None
@@ -21,8 +24,11 @@ def settings_window():
     window = QWidget()
     window.setLayout(layout)
     
-    # TODO: Implement actual functionality for search bar
+    # TODO: Add actual functionality for search bar
     # TODO: Add search functionality and connect to search module
+    # TODO: Add real-time search suggestions
+    # TODO: Add search history and recent searches
+    # TODO: Add advanced search options (date range, tags, mood)
     search_bar = QLineEdit()
     search_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
     search_bar.setPlaceholderText("Search")
@@ -34,11 +40,19 @@ def settings_window():
 
     # TODO: Add actual functionality for cloud button
     # TODO: Implement cloud settings integration
+    # TODO: Add cloud sync status indicator
+    # TODO: Add connection status display
     cloud_button = QPushButton("Cloud")
     cloud_button.setFixedSize(100, 50)
-    # TODO: Fix button positioning - use proper layout instead of move()
-    # TODO: Add proper spacing and alignment
+    # TODO: Fix button p    # TODO: Add proper spacing and alignment
+    # TODO: Add button styling consistency
+    # TODO: Add keyboard shortcuts for settings
     cloud_button.move(200, 20)
+    
+    # TODO: Add cloud button click handler
+    # TODO: Connect cloud button to cloud_settings function
+    # TODO: Add more settings buttons (theme, export, import, etc.)
+    layout.addWidget(cloud_button)
 
 
 

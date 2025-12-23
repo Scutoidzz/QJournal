@@ -9,6 +9,7 @@ import json
 import atexit
 
 
+
 class QJournalSetup():
 
     def loadstyle(self):
@@ -45,15 +46,16 @@ class QJournalSetup():
 
 
         
-        # TODO: Consider adding a proper application icon and splash screen
+        # TODO: Add proper layout management instead of manual positioning
+        # TODO: Implement responsive design for different screen sizes
+        # TODO: Add proper widget alignment and spacing
         QJournal = QLabel("QJournal")
         QJournal.move(291, 50)
         QJournal.setFont(font)
 
-
-
-
-
+        # TODO: Add button styling consistency with main app
+        # TODO: Add keyboard shortcuts and accessibility
+        # TODO: Add hover effects and visual feedback
         start_button = QPushButton("Start")
         start_button.move(291, 172)
         start_button.setFixedSize(100, 50)
@@ -107,10 +109,20 @@ class QJournalSetup():
         print("Setup - window should be visible now")
     
     def start_qjournal(self):
-        """Start the main qjournal application"""
+        """Start the main qjournal application
+        
+        TODO:
+        - Add proper error handling for qjournal startup
+        - Add loading indicators during transition
+        - Implement proper cleanup of setup window
+        - Add validation that setup was completed successfully
+        - Add graceful handling of missing dependencies
+        """
         print("Starting QJournal...")
         saver()  # Save that setup is complete
+        # TODO: Handle potential errors in qjournal startup
         qjournal()
+        # TODO: Close setup window properly
 
 
 
