@@ -13,7 +13,6 @@ import logging
 
 log_path = "log.txt"
 logging.basicConfig(filename=log_path, level=logging.INFO)
-# TODO: Implement proper exception handling for application startup
 # TODO: Add configuration validation and schema checking
 
 def load_config():
@@ -29,8 +28,6 @@ def load_config():
         logging.info("Config loaded successfully")
         return config
     except FileNotFoundError:
-        # BUG: Typo "config.json" should be "config.json"
-        # TODO: Fix typo in filename: config.json -> config.json
         logging.error("Config file not found, creating a new one...")
         with open("config.json", 'w') as f:
             json.dump({}, f)
@@ -67,4 +64,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nGoodbye!")
+    except Exception as error:
+        print(f"Error: {error}")
+        logging.error(f"Error: {error}")

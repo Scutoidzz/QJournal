@@ -1,5 +1,4 @@
 #/bin/bash
-
 notify-send "imagine using an SH script from the internet instead of using a manual install"
 notify-send "could never be me..."
 echo "Cloning QJournal from GitHub..." 

@@ -1,3 +1,0 @@
-QSlider::groove:horizontal { 
-    height: 10px; background: #ccc; border-radius: 5px; 
-    }
