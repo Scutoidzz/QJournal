@@ -9,9 +9,19 @@ from newentry.newentry import new_entry
 from .functions.createdb import create_database
 import sqlite3
 
+# TODO: Implement proper MVC architecture pattern
+# TODO: Add proper dependency injection
+# TODO: Implement proper window state management
+
 main_window = None
 
 def qjournal():
+    """
+    TODO: Implement proper application singleton pattern
+    TODO: Add proper resource management and cleanup
+    TODO: Implement proper window positioning and state persistence
+    TODO: Add proper theming system with user customization
+    """
     
     create_database()
 
@@ -22,7 +32,7 @@ def qjournal():
     if app is None:
         app = QApplication(sys.argv)
     
-    # Close previous window if exists
+    
     if main_window is not None:
         main_window.close()
     
@@ -32,6 +42,8 @@ def qjournal():
         style = f.read()
         main_window.setStyleSheet(style)
     # TODO: Use proper layout management instead of fixed positioning
+    # TODO: Implement responsive design for different screen sizes
+    # TODO: Add proper accessibility support
     main_window.setFixedSize(682, 384)
     
     main_layout = QVBoxLayout()
@@ -41,6 +53,8 @@ def qjournal():
     calendar_layout.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignCenter)
     
     calendar_widget = QCalendarWidget()
+    # TODO: Implement proper calendar integration with database entries
+    # TODO: Add visual indicators for entries on specific dates
     calendar_widget.setFixedSize(321, 164)
     calendar_layout.addWidget(calendar_widget)
     
@@ -71,8 +85,16 @@ def qjournal():
     settings_button.clicked.connect(settings_window)
     new_entry_button.clicked.connect(new_entry)
     
+    # TODO: Implement proper keyboard shortcuts
+    # TODO: Add proper tooltips and help system
     main_window.show()
 def save_config():
+    """
+    TODO: Implement proper configuration management system
+    TODO: Add configuration validation and schema enforcement
+    TODO: Add configuration migration support
+    TODO: Implement proper error handling for config operations
+    """
     print("saving to config")
     to_be_converted = {
         "setup_completed":"True",

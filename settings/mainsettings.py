@@ -4,10 +4,20 @@ from PyQt6.QtGui import QIcon, QPixmap
 import os
 import sys
 
+# TODO: Implement proper settings management system
+# TODO: Add proper settings validation and schema
+# TODO: Implement proper settings persistence and backup
+
 
 settings_window_instance = None
 
 def settings_window():
+    """
+    TODO: Implement proper settings window management
+    TODO: Add proper settings categories and organization
+    TODO: Implement proper settings validation and feedback
+    TODO: Add proper settings reset functionality
+    """
     global settings_window_instance
     layout = QVBoxLayout()
     window = QWidget()
@@ -22,16 +32,6 @@ def settings_window():
     settings_label = QLabel("Settings")
     layout.addWidget(settings_label)
 
-    cloud_button = QPushButton("Cloud")
-
-    sync_to_cloud_button = QPushButton("Sync to Cloud")
-    sync_to_cloud_button.setFixedSize(125, 50)
-
-    cloud_button.move(200, 20)
-    
-    layout.addWidget(cloud_button)
-
-
 
 
     if settings_window_instance is not None:
@@ -39,6 +39,7 @@ def settings_window():
     
     window.setWindowTitle("Settings")
     window.setFixedSize(682, 384)
+
     window.show()
     
     settings_window_instance = window
