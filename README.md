@@ -2,20 +2,6 @@
 
 An advanced journaling application built with PyQt6.
 
-## Features
-
-- **First-time setup**: Guided setup process for new users
-- **Main interface**: Clean calendar-based journal interface
-- **New entries**: Create and manage journal entries
-- **Settings**: Configure application preferences
-- **Cloud sync**: Support for multiple cloud storage providers (planned)
-
-## Requirements
-
-- Python 3.8+
-- PyQt6 >= 6.0.0
-- sqlite3
-
 ## Installation
 
 1. Clone the repository:

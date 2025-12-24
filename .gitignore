@@ -4,5 +4,7 @@
 .cursor/
 .todo2/
 
-
 *.db
+
+*.forai
+log.txt

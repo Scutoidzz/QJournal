@@ -18,6 +18,8 @@ def create_database():
     try:
         # Create a database connection and get a cursor
         # TODO: Make database path configurable from settings
+        # BUG: Check for filename consistency. Used "qJournal.db" here but "QJournal.db" in newentry.py.
+        #      On Linux these are two different files!
         # TODO: Add proper database connection options and timeout
         conn = sqlite3.connect("qJournal.db")
         cursor = conn.cursor()

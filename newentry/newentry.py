@@ -1,14 +1,15 @@
+
 from PyQt6.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QLabel, QHBoxLayout
 from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import Qt
+from .mood import mood_picker
 import sys
-import os
+import os  
 import sqlite3
 import json
 import atexit
 
-# TODO: Implement proper entry management system
-# TODO: Implement proper auto-save functionality
+# TODO: Implement proper entry management syste
 
 def for_atexit():
     """
@@ -24,8 +25,11 @@ def save_entry():
     TODO: Add proper error handling and user feedback
     TODO: Implement proper timestamp and metadata handling
     """
+    # BUG: This currently saves hardcoded text. It should pull from the entry_input widget.
+    # TODO: Pass the EntryWindow instance or find a way to access entry_input.toPlainText()
     conn = sqlite3.connect("QJournal.db")
     cursor = conn.cursor()
+    #TODO: Add the actual sql options
     cursor.execute("INSERT INTO entries (title, content) VALUES (?, ?)", ("New Entry", "Entry content"))
     conn.commit()
     conn.close()
@@ -37,6 +41,10 @@ def go_back():
     TODO: Implement proper navigation history
     """
     new_entry_window.close()
+
+def mood():
+    mood_picker()
+    sqlite3.connect("QJournal.db").cursor().execute("INSERT INTO mood (mood) VALUES (?)", (mood_picker(),))
 
 def new_entry():
     """
@@ -74,10 +82,12 @@ def new_entry():
 
     submit_button = QPushButton("Submit")
     submit_button.setFixedSize(321, 100)
-    # TODO: Create a mockup to find the move -  positioning
-    # TODO: Implement proper form validation before submission
-    # TODO: Add proper save confirmation to user
+    # BUG: submit_button.move(20, 20) has no effect because it's managed by buttonbarlayout later.
+    # TODO: Use layout alignment or spacers instead of manual positioning.
     submit_button.move(20, 20)
+    
+    # TODO: Connect submit_button to save_entry function
+    # submit_button.clicked.connect(save_entry)
 
     cancel_button = QPushButton("Cancel")
     cancel_button.setFixedSize(321, 100)
@@ -93,6 +103,7 @@ def new_entry():
     # TODO: Add proper mood selection interface
     # TODO: Add proper mood analytics and insights 
     mood_button.setFixedSize(642, 50)
+    mood_button.clicked.connect(mood)
 
     buttonbarlayout = QHBoxLayout()
     layout.addWidget(mood_button)
@@ -100,8 +111,11 @@ def new_entry():
     buttonbarlayout.addWidget(submit_button)    
     buttonbarlayout.addWidget(cancel_button)
     layout.addLayout(buttonbarlayout)
+
+    submit_button.clicked.connect(save_entry)
+    cancel_button.clicked.connect(go_back)
     
-    # TODO: Implement proper button event handlers
+    
     # TODO: Add proper form submission logic
     # TODO: Implement proper window close handling
 

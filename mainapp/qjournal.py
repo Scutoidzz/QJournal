@@ -4,22 +4,24 @@ from PyQt6.QtGui import QFont, QIcon, QImage
 import sys
 from PyQt6.QtCore import Qt
 import json
+import logging
 from settings.mainsettings import settings_window
 from newentry.newentry import new_entry
 from .functions.createdb import create_database
 import sqlite3
 
-# TODO: Implement proper MVC architecture pattern
-# TODO: Add proper dependency injection
-# TODO: Implement proper window state management
+loggingpath = "log.txt"
+logging.basicConfig(filename=loggingpath, level=logging.INFO)
 
 main_window = None
 
+def pull_up_entry(day):
+    print("pulling up entry")
+
+
 def qjournal():
     """
-    TODO: Implement proper application singleton pattern
-    TODO: Add proper resource management and cleanup
-    TODO: Implement proper window positioning and state persistence
+  
     TODO: Add proper theming system with user customization
     """
     
@@ -35,18 +37,22 @@ def qjournal():
     
     if main_window is not None:
         main_window.close()
+        
     
     main_window = QMainWindow()
     main_window.setWindowIcon(QIcon("assets/qappicon.png"))
-    with open("mainapp/maintheming.qss", "r") as f:
-        style = f.read()
-        main_window.setStyleSheet(style)
-    # TODO: Use proper layout management instead of fixed positioning
-    # TODO: Implement responsive design for different screen sizes
-    # TODO: Add proper accessibility support
+    try:
+        with open("mainapp/maintheming.qss", "r") as f:
+            style = f.read()
+            main_window.setStyleSheet(style)
+    except FileNotFoundError:
+        print("Warning: maintheming.qss not found")
+        logging.error("Theming not found")
+    
     main_window.setFixedSize(682, 384)
     
-    main_layout = QVBoxLayout()
+    main_layout = QVBoxLayout()    
+
     
     calendar_container = QWidget()
     calendar_layout = QVBoxLayout(calendar_container)
@@ -57,6 +63,8 @@ def qjournal():
     # TODO: Add visual indicators for entries on specific dates
     calendar_widget.setFixedSize(321, 164)
     calendar_layout.addWidget(calendar_widget)
+
+    calendar_widget.clicked.connect(lambda: pull_up_entry(calendar_widget.selectedDate()))
     
     # Create button container
     button_widget = QWidget()
@@ -82,6 +90,9 @@ def qjournal():
     main_window.setCentralWidget(central_widget)
     main_window.setWindowTitle("QJournal")
     
+    # TODO: Connect submit button to save_entry function
+    # TODO: Pass the actual entry content to pull_up_entry
+    
     settings_button.clicked.connect(settings_window)
     new_entry_button.clicked.connect(new_entry)
     
@@ -106,7 +117,7 @@ def save_config():
     with open("config.json", "w") as f:
         f.write(jsonparsed)
 
-
+0
 if __name__ == "__main__":
     qjournal()
     

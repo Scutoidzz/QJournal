@@ -9,8 +9,10 @@ from mainapp.qjournal import qjournal
 from firsttimesetup.onepager import QJournalSetup
 from splash.splashscreen import splash
 from settings.mainsettings import settings_window
+import logging
 
-# TODO: Add proper logging configuration instead of print statements
+log_path = "log.txt"
+logging.basicConfig(filename=log_path, level=logging.INFO)
 # TODO: Implement proper exception handling for application startup
 # TODO: Add configuration validation and schema checking
 
@@ -24,41 +26,43 @@ def load_config():
     try:
         with open("config.json", "r") as f:
             config = json.load(f)
-        print("Config loaded successfully")
+        logging.info("Config loaded successfully")
         return config
     except FileNotFoundError:
-        print("Config file not found, creating a new one...")
+        # BUG: Typo "config.json" should be "config.json"
+        # TODO: Fix typo in filename: config.json -> config.json
+        logging.error("Config file not found, creating a new one...")
         with open("config.json", 'w') as f:
             json.dump({}, f)
         return {}
 
 def main():
-    """
-    TODO: Implement proper application lifecycle management
-    TODO: Add command line argument parsing
-    TODO: Add proper error recovery mechanisms
-    TODO: Implement proper cleanup on exit
-    """
-    print("Starting QJournal...")
+
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument("--config", type=str, default="config.json", help="Path to configuration file")
+    argparser.add_argument("--log", type=str, default="log.txt", help="Path to log file")
+    args = argparser.parse_args()
+    logging.info("Starting QJournal...")
     config = load_config()
     
     if not config:
-        print("First time use detected")
-        # TODO: Add proper application instance management
+        logging.info("First time use detected")
         app = splash()
         setup = QJournalSetup()
         setup.onepager()
         app.exec()
     elif "first" in config:
-        print("Not first time use.")
+        # TODO: Standardize config keys (using "first" vs "setup_completed")
+        logging.info("Not first time use.")
         try:
             qjournal()
         except Exception as error:
             # TODO: Implement proper error reporting and user feedback
-            print(f"Error: {error}")
+            logging.error(f"Error: {error}")
+            # TODO: Add a fallback mechanism if the main app fails to load
     else: 
-        # TODO: Add configuration repair functionality
-        print("Error: Config file is corrupted")
+        json.dump({}, open("config.json", "w"))
+        logging.info("Config file is corrupted, creating a new one...")
         splash()
 
 
