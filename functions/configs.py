@@ -6,34 +6,25 @@ import platform
 # a file with system variables.
 
 def os_name():
-    """Get the operating system name.
     
-    TODO:
-    - Add proper error handling
-    - Return more detailed OS information
-    - Consider using platform module for better detection
-    """
-    osname = os.name
+    try:
+        osname = os.name
+    except:
+        print("There was an error getting the OS name")
     return osname
 
 def os_version():
-    """Get the operating system version.
-    
-    TODO:
-    - Add proper error handling
-    - Return formatted version string
-    - Add support for different OS version formats
-    """
-    osversion = sys.version
+    try:
+        osversion = sys.version
+        osversionstring = platform.version()
+    except: 
+        print("There was an error getting the OS name")
     return osversion
 
 def username():
-    """Get the current username.
-    
-    TODO:
-    - Add proper error handling for getlogin() failures
-    - Add fallback methods for username detection
-    - Consider privacy implications
-    """
-    username = os.getlogin()
+
+    try:
+        username = os.getlogin()
+    except:
+        print("There was an error getting the username")
     return username

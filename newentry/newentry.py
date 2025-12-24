@@ -43,25 +43,24 @@ def new_entry():
     layout.addWidget(entry_input)
 
     submit_button = QPushButton("Submit")
-
     submit_button.setFixedSize(321, 100)
     #TODO: Create a mockup to find the move
     submit_button.move(20, 20)
 
     cancel_button = QPushButton("Cancel")
     cancel_button.setFixedSize(321, 100)
-    cancel_button.clicked.connect(go_back())
+    cancel_button.clicked.connect(go_back)
     
 
     # LOWPRIORITY: Add icons to buttons
-
-    mood_button = QPushButton("Mood")
+ 
+    mood_button = QPushButton("Mood") 
     mood_button.setFixedSize(642, 50)
 
     buttonbarlayout = QHBoxLayout()
     layout.addWidget(mood_button)
 
-    buttonbarlayout.addWidget(submit_button)
+    buttonbarlayout.addWidget(submit_button)    
     buttonbarlayout.addWidget(cancel_button)
     layout.addLayout(buttonbarlayout)
 

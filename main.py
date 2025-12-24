@@ -32,12 +32,16 @@ def main():
         setup = QJournalSetup()
         setup.onepager()
         app.exec()
-    else:
+    elif "first" in config:
         print("Not first time use.")
         try:
             qjournal()
         except Exception as error:
             print(f"Error: {error}")
+    else: 
+        print("Error: Config file is corrupted")
+        splash()
+
 
 if __name__ == "__main__":
     main()

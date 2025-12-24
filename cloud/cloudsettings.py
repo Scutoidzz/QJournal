@@ -6,19 +6,7 @@ import requests
 import os
 
 def cloud_settings():
-    """Open cloud settings window.
     
-    TODO:
-    - Implement actual cloud functionality and API integration
-    - Add authentication system for cloud services
-    - Add cloud provider selection (Google Drive, Dropbox, etc.)
-    - Add conflict resolution for sync issues
-    - Add offline mode support
-    - Add progress indicators for sync operations
-    - Add proper error handling for network issues
-    - Add encryption options for cloud data
-    - Add sync settings (auto-sync, manual sync, etc.)
-    """
     print("Loading the cloud settings...")
     window = QWidget()
     window.setWindowTitle("Cloud Settings")
