@@ -3,18 +3,13 @@ from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt, QTimer
 import sys
 import os
+import logging
+import random
+import time
 
-# TODO: Implement proper splash screen with progress indicators
-# TODO: Add proper loading state management
-# TODO: Add proper animation and transitions
 
+logging.basicConfig(filename="log.txt", level=logging.INFO)
 def splash():
-    """
-    TODO: Implement proper splash screen with loading progress
-    TODO: Add proper error handling for missing assets
-    TODO: Add proper splash screen timing and configuration
-    TODO: Add proper application initialization tracking
-    """
     # Check if QApplication already exists
     app = QApplication.instance()
     if app is None:
@@ -23,44 +18,48 @@ def splash():
     image_path = "assets/journalsplash.png"
     print(f"Attempting to load splash image from: {image_path}")
     
-    # TODO: Add proper asset validation and fallback handling
-    # TODO: Add proper image scaling for different screen resolutions
     if not os.path.exists(image_path):
-        print(f"ERROR: Image file not found at {image_path}")
+        logging.log(logging.ERROR, f"ERROR: Image file not found at {image_path}")
+        return app
+
+    if os.path.getsize(image_path) == 0:
+        logging.log(logging.ERROR, f"ERROR: Image file is empty at {image_path}")
+        return app
+
+    if not os.path.isfile(image_path):
+        logging.log(logging.ERROR, "Is not a file")
         return app
         
     pixmap = QPixmap(image_path)
     if pixmap.isNull():
-        print("ERROR: Failed to load image (invalid or corrupted)")
+        logging.log(logging.ERROR, "Failed to load image (invalid or corrupted)")
         return app
         
-    print(f"Image loaded successfully: {pixmap.width()}x{pixmap.height()}")
+    logging.log(logging.INFO, f"Image loaded successfully: {pixmap.width()}x{pixmap.height()}")
     
     # Create splash screen
-    # TODO: Add proper splash screen configuration and styling
-    # TODO: Add proper progress bar and status messages
     splash_screen = QSplashScreen(pixmap, Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
     splash_screen.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
     splash_screen.setWindowIcon(QIcon("assets/qappicon.png"))
 
     # Show the splash screen
     splash_screen.show()
-    print("Splash screen shown")
+    logging.log(logging.INFO, "Splash screen shown")
     
     # Process events to make sure the window is shown
     app.processEvents()
     
-    # TODO: Implement proper application loading with progress tracking
-    # TODO: Add proper initialization steps with user feedback
-    # TODO: Replace hardcoded timing with actual loading completion
     import time
     start_time = time.time()
-    while time.time() - start_time < 5.0:  # 5 seconds
+
+    randomtime = random.randint(2, 5)
+
+    while time.time() - start_time < randomtime:  # Light work no reaction
         app.processEvents()
         time.sleep(0.01)  # Small sleep to prevent 100% CPU usage
     
     splash_screen.close()
-    print("Splash screen closed")
+    logging.log(logging.INFO, "Splash screen closed")
     
     # Return the app instance for further use
     return app
