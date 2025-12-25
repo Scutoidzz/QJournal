@@ -3,6 +3,7 @@ from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt, QTimer
 import sys
 import os
+from standalonemood.mood import main as mood
 import logging
 import random
 import time

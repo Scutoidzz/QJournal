@@ -13,6 +13,7 @@ import logging
 log_path = "log.txt"
 logging.basicConfig(filename=log_path, level=logging.INFO)
 # TODO: Add configuration validation and schema checking
+# TODO: Implement a logging rotating handler to prevent log file from growing too large
 
 def load_config():
     """
@@ -57,6 +58,7 @@ def main():
             logging.error(f"Error: {error}")
             # TODO: Add a fallback mechanism if the main app fails to load
     else: 
+        # TODO: Instead of wiping the config, try to recover or notify the user
         json.dump({}, open("config.json", "w"))
         logging.info("Config file is corrupted, creating a new one...")
         splash()

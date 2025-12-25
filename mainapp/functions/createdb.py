@@ -4,12 +4,8 @@ import sys
 from .configs import get_configurations
 from pathlib import Path
 
-# TODO: Implement proper database management with connection pooling
-# TODO: Add proper database migration system
-# TODO: Add proper database backup and recovery mechanisms
-
 def create_database():
-    """
+    """  
     TODO: Implement proper database creation with configuration
     TODO: Add proper database schema validation
     TODO: Add proper database initialization with default data
@@ -18,7 +14,6 @@ def create_database():
     try:
         # Create a database connection and get a cursor
         # TODO: Make database path configurable from settings
-        # BUG: Check for filename consistency. Used "qJournal.db" here but "QJournal.db" in newentry.py.
         #      On Linux these are two different files!
         # TODO: Add proper database connection options and timeout
         conn = sqlite3.connect("qJournal.db")

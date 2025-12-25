@@ -6,6 +6,7 @@ from PyQt6.QtCore import Qt
 import json
 import logging
 from newentry.newentry import new_entry
+from standalonemood.mood import main as mood_picker
 from .functions.createdb import create_database
 import sqlite3
 
@@ -20,8 +21,9 @@ def pull_up_entry(day):
 
 def qjournal():
     """
-  
     TODO: Add proper theming system with user customization
+    TODO: Refactor this function into smaller, more manageable components
+    TODO: Implement a centralized event handler for button clicks
     """
     
     create_database()
@@ -93,10 +95,12 @@ def qjournal():
     # TODO: Pass the actual entry content to pull_up_entry
     
     new_entry_button.clicked.connect(new_entry)
+    settings_button.clicked.connect(mood_picker)
     
     # TODO: Implement proper keyboard shortcuts
     # TODO: Add proper tooltips and help system
     main_window.show()
+# TODO: Use this save_config function or remove it if redundant
 def save_config():
     print("saving to config")
     to_be_converted = {
@@ -109,7 +113,7 @@ def save_config():
     with open("config.json", "w") as f:
         f.write(jsonparsed)
 
-0
+# TODO: Remove stray characters and clean up the file
 if __name__ == "__main__":
     qjournal()
     
