@@ -5,7 +5,6 @@ import sys
 from PyQt6.QtCore import Qt
 import json
 import logging
-from settings.mainsettings import settings_window
 from newentry.newentry import new_entry
 from .functions.createdb import create_database
 import sqlite3
@@ -71,8 +70,8 @@ def qjournal():
     button_layout = QHBoxLayout(button_widget)
     
     new_entry_button = QPushButton("New Entry")
-    settings_button = QPushButton("Settings")
-    settings_button.setToolTip("Open Settings")
+    settings_button = QPushButton("Just log your mood")
+    settings_button.setToolTip("Open the mood picker")
     new_entry_button.setFixedSize(321, 100)
     new_entry_button.setToolTip("Create a new entry")
     settings_button.setFixedSize(321, 100)
@@ -93,19 +92,12 @@ def qjournal():
     # TODO: Connect submit button to save_entry function
     # TODO: Pass the actual entry content to pull_up_entry
     
-    settings_button.clicked.connect(settings_window)
     new_entry_button.clicked.connect(new_entry)
     
     # TODO: Implement proper keyboard shortcuts
     # TODO: Add proper tooltips and help system
     main_window.show()
 def save_config():
-    """
-    TODO: Implement proper configuration management system
-    TODO: Add configuration validation and schema enforcement
-    TODO: Add configuration migration support
-    TODO: Implement proper error handling for config operations
-    """
     print("saving to config")
     to_be_converted = {
         "setup_completed":"True",

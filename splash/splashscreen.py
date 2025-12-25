@@ -49,7 +49,6 @@ def splash():
     # Process events to make sure the window is shown
     app.processEvents()
     
-    import time
     start_time = time.time()
 
     randomtime = random.randint(2, 5)

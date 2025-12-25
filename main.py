@@ -8,7 +8,6 @@ import time
 from mainapp.qjournal import qjournal
 from firsttimesetup.onepager import QJournalSetup
 from splash.splashscreen import splash
-from settings.mainsettings import settings_window
 import logging
 
 log_path = "log.txt"

@@ -8,3 +8,5 @@
 
 *.forai
 log.txt
+
+.gitignore
