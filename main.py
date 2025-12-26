@@ -1,67 +1,132 @@
 import sys
 import os
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QPushButton, QFileDialog
+from PyQt6.QtWidgets import QApplication, QMessageBox
 import json
 import argparse
 import traceback
-import time
+import logging
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
 from mainapp.qjournal import qjournal
 from firsttimesetup.onepager import QJournalSetup
 from splash.splashscreen import splash
-import logging
 
-log_path = "log.txt"
-logging.basicConfig(filename=log_path, level=logging.INFO)
-# TODO: Add configuration validation and schema checking
-# TODO: Implement a logging rotating handler to prevent log file from growing too large
+# Constants
+APP_NAME = "QJournal"
+DEFAULT_CONFIG_NAME = "config.json"
+DEFAULT_LOG_NAME = "log.txt"
+
+def get_app_dir():
+    """Returns the application directory in the user's home folder."""
+    home = Path.home()
+    if sys.platform == "win32":
+        app_dir = home / "AppData" / "Roaming" / APP_NAME
+    elif sys.platform == "darwin":
+        app_dir = home / "Library" / "Application Support" / APP_NAME
+    else:
+        app_dir = home / ".config" / APP_NAME
+    
+    app_dir.mkdir(parents=True, exist_ok=True)
+    return app_dir
+
+def setup_logging():
+    """Configures centralized logging with rotation."""
+    app_dir = get_app_dir()
+    log_path = app_dir / DEFAULT_LOG_NAME
+    
+    handler = RotatingFileHandler(log_path, maxBytes=1024*1024*5, backupCount=5)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[handler, logging.StreamHandler(sys.stdout)]
+    )
+    return log_path
 
 def load_config():
     """
-    TODO: Add configuration file validation
-    TODO: Implement backup configuration loading
-    TODO: Add support for environment variable overrides
-    TODO: Use proper configuration file path (relative to user home)
+    Loads configuration with support for user home directory,
+    environment variable overrides, and local migration.
     """
+    app_dir = get_app_dir()
+    config_path = app_dir / DEFAULT_CONFIG_NAME
+    
+    # Environment variable override
+    env_config = os.environ.get("QJOURNAL_CONFIG")
+    if env_config:
+        config_path = Path(env_config)
+
     try:
-        with open("config.json", "r") as f:
+        if not config_path.exists():
+            # Check for local config for migration
+            local_config = Path(DEFAULT_CONFIG_NAME)
+            if local_config.exists():
+                logging.info("Migrating local config to application directory...")
+                with open(local_config, "r") as f:
+                    config = json.load(f)
+                with open(config_path, "w") as f:
+                    json.dump(config, f, indent=4)
+                return config
+            return {}
+
+        with open(config_path, "r") as f:
             config = json.load(f)
-        logging.info("Config loaded successfully")
+        logging.info(f"Config loaded successfully from {config_path}")
         return config
-    except FileNotFoundError:
-        logging.error("Config file not found, creating a new one...")
-        with open("config.json", 'w') as f:
-            json.dump({}, f)
+    except Exception as e:
+        logging.error(f"Error loading config: {e}")
         return {}
 
 def main():
-
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument("--config", type=str, default="config.json", help="Path to configuration file")
-    argparser.add_argument("--log", type=str, default="log.txt", help="Path to log file")
+    setup_logging()
+    
+    argparser = argparse.ArgumentParser(description="QJournal - A Personal Privacy-Focused Journal")
+    argparser.add_argument("--config", type=str, help="Path to custom configuration file")
     args = argparser.parse_args()
+
+    if args.config:
+        os.environ["QJOURNAL_CONFIG"] = args.config
+
     logging.info("Starting QJournal...")
+    
+    # Create the QApplication instance here so it lives throughout the app life
+    app = QApplication.instance()
+    if not app:
+        app = QApplication(sys.argv)
+
     config = load_config()
     
-    if not config:
-        logging.info("First time use detected")
-        app = splash()
+    # Standardized key: setup_completed
+    # Support migration from 'first' key or setup.json
+    setup_completed = config.get("setup_completed") or config.get("first") == "false"
+    
+    # Check for setup.json (legacy fallback)
+    if not setup_completed and Path("setup.json").exists():
+        try:
+            with open("setup.json", "r") as f:
+                setup_data = json.load(f)
+                if setup_data.get("firsttime") == "false":
+                    setup_completed = True
+        except:
+            pass
+
+    if not setup_completed:
+        logging.info("First time use or setup incomplete detected")
+        # splash handles its own loop or just shows and returns
+        splash() 
         setup = QJournalSetup()
         setup.onepager()
-        app.exec()
-    elif "first" in config:
-        # TODO: Standardize config keys (using "first" vs "setup_completed")
-        logging.info("Not first time use.")
+    else:
+        logging.info("Setup already completed.")
         try:
             qjournal()
         except Exception as error:
-            # TODO: Implement proper error reporting and user feedback
-            logging.error(f"Error: {error}")
-            # TODO: Add a fallback mechanism if the main app fails to load
-    else: 
-        # TODO: Instead of wiping the config, try to recover or notify the user
-        json.dump({}, open("config.json", "w"))
-        logging.info("Config file is corrupted, creating a new one...")
-        splash()
+            logging.error(f"Application error: {error}")
+            logging.error(traceback.format_exc())
+            QMessageBox.critical(None, "Error", f"A critical error occurred: {error}")
+            return
+
+    # Start the event loop
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
@@ -70,5 +135,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\nGoodbye!")
     except Exception as error:
-        print(f"Error: {error}")
-        logging.error(f"Error: {error}")
+        logging.critical(f"Unhandled exception: {error}")
+        logging.critical(traceback.format_exc())
+        print(f"Fatal error: {error}")
+

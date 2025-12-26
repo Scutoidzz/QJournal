@@ -1,53 +1,77 @@
-
 import os
 import sys
 import platform
 import logging
+import getpass
+from pathlib import Path
+
+# Constants
+APP_NAME = "QJournal"
+
+def get_app_dir():
+    """Returns the application directory in the user's home folder."""
+    home = Path.home()
+    if sys.platform == "win32":
+        app_dir = home / "AppData" / "Roaming" / APP_NAME
+    elif sys.platform == "darwin":
+        app_dir = home / "Library" / "Application Support" / APP_NAME
+    else:
+        app_dir = home / ".config" / APP_NAME
+    
+    app_dir.mkdir(parents=True, exist_ok=True)
+    return app_dir
+
+def get_db_path():
+    """Returns the path to the main database file."""
+    return get_app_dir() / "qJournal.db"
 
 # a file with system variables.
-# TODO: Implement proper system information gathering
-# TODO: Add proper platform-specific optimizations
 
 def os_name():
-    #TODO Add these entries to exception handling
+    """
+    Returns a normalized OS name string.
+    """
     try:
+        system = platform.system().lower()
+        if "linux" in system:
+            return "linux"
+        elif "windows" in system:
+            return "windows"
+        elif "darwin" in system:
+            return "mac"
+        elif "java" in system:
+            return "java"
+        return system
+    except Exception as e:
+        logging.error(f"Error getting OS name using platform: {e}")
+        # Fallback to os.name
         osname = os.name
         if osname == "posix":
-            osname = "linux"
+            return "linux"
         elif osname == "nt":
-            osname = "windows"
-        elif osname == "java":
-            osname = "java"
-        elif osname == "darwin":
-            osname = "mac"
-    except:
-        logging.error("There was an error getting the OS name")
-        logging.info("switching to platform")
-        osname = platform.system()
-    return osname
+            return "windows"
+        return osname
 
 def os_version():
     """
-    TODO: Implement proper version parsing and normalization
-    TODO: Add proper error handling and logging
-    TODO: Add support for version comparison utilities
+    Returns the operating system's release version.
     """
     try:
-        osversion = sys.version
-        osversionstring = platform.version()
-    except: 
-        print("There was an error getting the OS name")
-    return osversion
+        # platform.release() gives the version/release (e.g., '10' for Windows or '5.15.0' for Linux)
+        version = platform.release()
+        return version
+    except Exception as e:
+        logging.error(f"Error getting OS version: {e}")
+        return "Unknown"
 
 def username():
     """
-    TODO: Implement proper username detection with fallbacks
-    TODO: Add proper error handling and logging
-    TODO: Add support for different user name formats
+    Returns the current logged-in username with multiple fallbacks.
     """
-
     try:
-        username = os.getlogin()
-    except:
-        print("There was an error getting the username")
-    return username
+        # getpass.getuser() looks at environment variables and password database
+        return getpass.getuser()
+    except Exception as e:
+        logging.error(f"Error getting username using getpass: {e}")
+        # Manual fallbacks for environment variables
+        return os.environ.get("USER") or os.environ.get("USERNAME") or os.environ.get("LOGNAME") or "unknown_user"

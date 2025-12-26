@@ -8,13 +8,22 @@ import json
 import atexit
 import logging
 
+from functions.configs import get_db_path
+
 def save_mood(slider):
     mood = slider.value()
-    conn = sqlite3.connect("QJournal.db")
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO mood (mood) VALUES (?)", (mood,))
-    conn.commit()
-    conn.close()
+    db_path = get_db_path()
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO entries (title, content, mood) VALUES (?, ?, ?)", ("Mood Log", "Daily mood logging", str(mood)))
+        conn.commit()
+        conn.close()
+        # Optionally close window on save
+        if mood_window:
+            mood_window.close()
+    except Exception as e:
+        print(f"Error saving mood: {e}")
 
 mood_window = None
 
@@ -30,10 +39,10 @@ def main():
     window.setFixedSize(682, 384)
     layout = QVBoxLayout()
     window.setLayout(layout)
-    mood_label = QLabel("Mood")
+    mood_label = QLabel("How are you feeling?")
     mood_label.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
     layout.addWidget(mood_label)
-    font = QFont("Inter, Helvetica, Arial", 34)
+    font = QFont("Inter, Helvetica, Arial", 24)
     mood_label.setFont(font)
     mood_slider = QSlider(Qt.Orientation.Horizontal)
     mood_slider.setRange(0, 40)
@@ -44,7 +53,7 @@ def main():
     mood_slider.setFixedSize(642, 50)
     layout.addWidget(mood_slider)
 
-    mood_button = QPushButton("Save")
+    mood_button = QPushButton("Save Mood")
     mood_button.setFixedSize(642, 50)
     layout.addWidget(mood_button)
     mood_button.clicked.connect(lambda: save_mood(mood_slider))
@@ -52,5 +61,3 @@ def main():
     
     if __name__ == "__main__":
         sys.exit(app.exec())
-    else:
-        app.exec()

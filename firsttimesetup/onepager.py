@@ -100,6 +100,7 @@ class QJournalSetup():
     def start_qjournal(self):
         print("Starting QJournal...")
         saver()
+        self.window.close() # Close setup window
         qjournal()
 
 
